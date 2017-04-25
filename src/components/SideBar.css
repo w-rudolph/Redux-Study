@@ -1,0 +1,20 @@
+#sideBar {
+    float: left;
+    width: 200px;
+    border-right: 1px solid #ddd;
+    min-height: 500px;
+    overflow: auto;
+}
+.sideBar-items {
+    list-style: none;
+    padding-left: 20px
+}
+.sideBar-item {
+    padding: 5px;
+}
+.sideBar-item a{
+    text-decoration: none;
+}
+.sideBar-item.active{
+    background: #ddd
+}
