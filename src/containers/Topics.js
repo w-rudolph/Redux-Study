@@ -6,7 +6,8 @@ import {Link} from 'react-router'
 class Topics extends React.Component{
     constructor(props){
         super(props);
-        this.props.getAllTopics();
+        const {dispatch, getAllTopics} = this.props;
+        dispatch(getAllTopics());
     }
     getTopicTab(tab){
         return {
@@ -24,7 +25,8 @@ class Topics extends React.Component{
                         {topics.map((topic, index) => {
                             return (
                                 <li key={index} className="topic-item">
-                                    <a href='javascript:void(0)' title={topic.author.loginname}><img width="30" height="30" src={topic.author.avatar_url} alt="" /></a>&nbsp;
+                                    <Link title={topic.author.loginname} to={'user/' + topic.author.loginname}>
+                                    <img width="30" height="30" src={topic.author.avatar_url} alt="" /></Link>&nbsp;
                                     <span>
                                         <span className="reply_count">{topic.reply_count}</span> / <span className="visit_count">{topic.visit_count}</span>
                                     </span>&nbsp;
@@ -44,7 +46,8 @@ class Topics extends React.Component{
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        topics: state.topics
+        topics: state.topics,
+        getAllTopics
     }
 }
-export default connect(mapStateToProps,{getAllTopics})(Topics);
+export default connect(mapStateToProps)(Topics);

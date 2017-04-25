@@ -2,13 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getTopic} from '../actions/cnode.js'
 import {getDateDiff} from '../utils'
+import {Link} from 'react-router'
 
 class Topic extends React.Component {
     
     constructor(props){
         super(props);
         const {id} = this.props.params;
-        this.props.getTopic(id);
+        const {dispatch, getTopic} = this.props;
+        dispatch(getTopic(id));
     }
     getTopicTab(tab){
         return {
@@ -37,7 +39,8 @@ class Topic extends React.Component {
                                 <ul className="reply-items">
                                 {(topic.replies || []).map((reply, index) => {
                                     return <li className="reply-item" key={index}>
-                                        <a href="jjavascript:void(0)"><img width="30" height="30" src={reply.author.avatar_url} alt="" /></a>&nbsp;<a className="reply-loginname" href="#">{reply.author.loginname}</a>&nbsp;<span className="reply-floor">{index + 1}楼 • {getDateDiff(reply.create_at)}</span><br />
+                                        <Link to={'/user/' + reply.author.loginname}><img width="30" height="30" src={reply.author.avatar_url} alt="" /></Link>&nbsp;
+                                        <Link className="reply-loginname" to={'/user/' + reply.author.loginname}>{reply.author.loginname}</Link>&nbsp;<span className="reply-floor">{index + 1}楼 • {getDateDiff(reply.create_at)}</span><br />
                                         <span dangerouslySetInnerHTML={{__html: reply.content}}></span>
                                     </li>
                                 })}
@@ -50,8 +53,9 @@ class Topic extends React.Component {
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        topic: state.topic
+        topic: state.topic,
+        getTopic
     }
 }
-export default connect(mapStateToProps,{getTopic})(Topic);
+export default connect(mapStateToProps)(Topic);
 
