@@ -11,8 +11,10 @@ class App extends React.Component{
     }
     render(){
         const {counter} = this.props;
+        const attr = {};
+        if(counter.num <= 0) attr.disabled = true;
         return <div>
-        <button onClick={this.btnClick.bind(this, -1)}>1</button>
+        <button {...attr} onClick={this.btnClick.bind(this, -1)}>-</button>
             &nbsp;&nbsp;{counter.num}&nbsp;&nbsp;
         <button onClick={this.btnClick.bind(this, 1)}>+</button>
         </div>
