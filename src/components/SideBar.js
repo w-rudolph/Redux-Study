@@ -13,6 +13,10 @@ class SideBar extends Component{
             {
                 path: '/todo',
                 text: 'todo 列表'
+            },
+            {
+                path: '/topics',
+                text: 'Cnode API Demo'
             }]
         }
     }
