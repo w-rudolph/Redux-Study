@@ -4,6 +4,7 @@
     border-right: 1px solid #ddd;
     min-height: 500px;
     overflow: auto;
+    position: fixed;
 }
 .sideBar-items {
     list-style: none;
@@ -16,5 +17,6 @@
     text-decoration: none;
 }
 .sideBar-item.active{
+    border-left: 5px solid #e36fa4;
     background: #ddd
 }

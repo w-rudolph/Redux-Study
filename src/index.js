@@ -15,9 +15,9 @@ ReactDom.render((
     <Provider store={store}>
         <Router history={hashHistory}>
             <Route path='/' component={App}>
-                <IndexRedirect to='/counter'/>
-                <Route path='/counter' component={Counter}></Route>
-                <Route path='/todo' component={Todo}></Route>
+                <IndexRedirect to='counter'/>
+                <Route path='counter' component={Counter}></Route>
+                <Route path='todo' component={Todo}></Route>
             </Route>
         </Router>
     </Provider>
