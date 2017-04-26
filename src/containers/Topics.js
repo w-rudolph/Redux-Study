@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getAllTopics} from '../actions/cnode.js'
-import {Link} from 'react-router'
+import TopicItem from '../components/TopicItem'
 
 class Topics extends React.Component{
     constructor(props){
@@ -9,38 +9,21 @@ class Topics extends React.Component{
         const {dispatch, getAllTopics} = this.props;
         dispatch(getAllTopics());
     }
-    getTopicTab(tab){
-        return {
-            ask: '问答',
-            share: '分享',
-            job: '工作'
-        }[tab];
-    }
     render(){
         
         const {topics} = this.props;
         return (
-                    <div id="cnode-topics">
-                        <ul className="topics">
-                        {topics.map((topic, index) => {
-                            return (
-                                <li key={index} className="topic-item">
-                                    <Link title={topic.author.loginname} to={'user/' + topic.author.loginname}>
-                                    <img width="30" height="30" src={topic.author.avatar_url} alt="" /></Link>&nbsp;
-                                    <span>
-                                        <span className="reply_count">{topic.reply_count}</span> / <span className="visit_count">{topic.visit_count}</span>
-                                    </span>&nbsp;
-                                    {topic.top ? <span className="put_top">置顶</span> : ""}
-                                    {!topic.top && topic.good ? <span className="put_good">精华</span> : ""}
-                                    {!topic.top && !topic.good ? <span className="topic_tab">{this.getTopicTab(topic.tab)}</span> : ''}&nbsp;
-                                    <span className="topic-title">
-                                        <Link title={topic.title} to={'topic/' + topic.id}>{topic.title}</Link>
-                                    </span>
-                                </li>
-                            )
-                        })}
-                        </ul>
-                    </div>
+                <div id="cnode-topics">
+                    <div>API地址：<a href="https://cnodejs.org/api" target="_blank">https://cnodejs.org/api</a></div>
+                    <span style={{fontSize:'1.5em', fontWeight:'bold'}}>话题</span>
+                    <ul className="topics">
+                    {topics.map((topic, index) => {
+                        return (
+                            <TopicItem key={index} topic={topic}  /> 
+                        )
+                    })}
+                    </ul>
+                </div>
         )
     }
 }

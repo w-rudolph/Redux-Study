@@ -15,10 +15,10 @@ export function topic(state = {}, action){
             return state;
     }
 }
-export function user(state = {}, action){
+export function user(state = {recent_replies:[],recent_topics:[]}, action){
     switch(action.type){
         case 'SHOW_USER':
-            return action.user ? action.user : {}
+            return action.user ? action.user : state
         default:
             return state;
     }
